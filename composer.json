@@ -1,19 +1,37 @@
 {
-    "name": "swandam/core",
-    "description": "With the expectation of being an elegant cms...",
-    "type": "library",
-    "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "Swandam\\Core\\": "src/"
-        }
-    },
-    "authors": [
-        {
-            "name": "Ali İhsan Şepar",
-            "email": "aliihsansepar@gmail.com"
-        }
-    ],
-    "minimum-stability": "dev",
-    "require": {}
+  "name": "swandam/core",
+  "description": "With the expectation of being an elegant cms...",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Swandam\\Core\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Ali İhsan Şepar",
+      "email": "aliihsansepar@gmail.com"
+    }
+  ],
+  "require": {
+    "laravel/framework": "^9.0"
+  },
+  "minimum-stability": "dev",
+  "require-dev": {
+    "phpunit/phpunit": "^7.5|^8.0",
+    "orchestra/testbench": "8.0.x-dev"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Swandam\\Code\\SwandamServiceProvider"
+      ]
+    }
+  },
+  "scripts": {
+    "post-autoload-dump": [
+      "@php ./vendor/bin/testbench package:discover --ansi"
+    ]
+  }
 }
