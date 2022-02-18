@@ -1,0 +1,19 @@
+{
+    "name": "swandam/core",
+    "description": "With the expectation of being an elegant cms...",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Swandam\\Core\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ali İhsan Şepar",
+            "email": "aliihsansepar@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
