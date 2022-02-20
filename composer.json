@@ -5,8 +5,12 @@
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "Swandam\\Core\\": "src/"
-    }
+      "Swandam\\Core\\": "src/",
+      "Swandaö\\Core\\Tests\\": "tests"
+    },
+    "files": [
+      "src/Http/helpers.php"
+    ]
   },
   "authors": [
     {
@@ -32,6 +36,8 @@
   "scripts": {
     "post-autoload-dump": [
       "@php ./vendor/bin/testbench package:discover --ansi"
-    ]
+    ],
+    "test": "vendor/bin/phpunit",
+    "test-f": "vendor/bin/phpunit --filter"
   }
 }
