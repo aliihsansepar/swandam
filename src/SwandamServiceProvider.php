@@ -5,16 +5,21 @@ namespace Swandam\Core;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use Swandam\Core\Foundation\Swandam;
 use Swandam\Core\Http\Middleware\AfterMiddleware;
 use Swandam\Core\Http\Middleware\Authenticate;
 use Swandam\Core\Http\Middleware\RedirectIfAuthenticate;
+use Swandam\Core\Providers\RouteServiceProvider;
 
 class SwandamServiceProvider extends ServiceProvider
 {
 
     public function register()
     {
-        //
+        $this->app->register(RouteServiceProvider::class);
+
+        $this->app->singleton(Swandam::class, Swandam::class);
+        $this->app->bind('Swandam', Swandam::class);
     }
 
     public function boot()
