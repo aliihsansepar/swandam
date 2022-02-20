@@ -4,15 +4,17 @@ use \Illuminate\Database\Migrations\Migration;
 use \Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreatePagesTable extends Migration
+class CreatePageDetailsTable extends Migration
 {
     public function up()
     {
-        Schema::create('pages', function (Blueprint $table) {
+        Schema::create('page_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('page_id')->index()->constrained()->cascadeOnDelete();
-            $table->foreignId('element_id')->index()->constrained()->cascadeOnDelete();
-            $table->date("date")->nullable();
+            $table->string('name');
+            $table->text('detail');
+            $table->foreignId('language_id')->index()->constrained()->cascadeOnDelete();
+            $table->string('slug');
             $table->string('status')->unsigned()->default(0);
             $table->timestamps();
             $table->softDeletes();
@@ -21,6 +23,6 @@ class CreatePagesTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('pages');
+        Schema::dropIfExists('page_details');
     }
 }

@@ -22,6 +22,6 @@ class CreateElementDetailsTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('pages');
+        Schema::dropIfExists('element_details');
     }
 }
