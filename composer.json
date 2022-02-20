@@ -25,7 +25,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Swandam\\Code\\SwandamServiceProvider"
+        "Swandam\\Core\\SwandamServiceProvider"
       ]
     }
   },
