@@ -2,8 +2,12 @@
 
 namespace Swandam\Core;
 
+use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use Swandam\Core\Http\Middleware\AfterMiddleware;
+use Swandam\Core\Http\Middleware\Authenticate;
+use Swandam\Core\Http\Middleware\RedirectIfAuthenticate;
 
 class SwandamServiceProvider extends ServiceProvider
 {
@@ -16,19 +20,18 @@ class SwandamServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+        $this->app->setLocale(session('panel.language.code', 'tr'));
 
         $this->publishes([
-          /*  __DIR__ . '/../Config/swandam.php' => config_path('swandam.php'),
-            __DIR__ . '/../Resource/lang' => $this->app->langPath('vendor/swandam'),
-            __DIR__ . '/../Resources/views/web' => resource_path('views/vendor/swandam'),*/
-            __DIR__ . '/../Assets' => public_path('vendor/swandam'),
-        ], 'swandam-assets');
+            __DIR__ . '/Assets' => public_path('vendor/swandam')
+        ], 'swandam');
 
-//        $this->loadRoutesFrom(__DIR__ . '/../Route/web.php');
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/migrations');
-        $this->loadTranslationsFrom(__DIR__ . '/../Resource/lang/web', 'swandam');
-        $this->loadViewsFrom(__DIR__ . '/../Resources/views/web', 'swandamWeb');
-        $this->loadViewsFrom(__DIR__ . '/../Resources/views/panel', 'swandam');
+        $this->loadMigrationsFrom(__DIR__ . '/Database/migrations');
+
+        $router = $this->app->make(Router::class);
+        $router->aliasMiddleware('web', AfterMiddleware::class);
+        $router->aliasMiddleware('auth', Authenticate::class);
+        $router->aliasMiddleware('guest', RedirectIfAuthenticate::class);
     }
 
 }
